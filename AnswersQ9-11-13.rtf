@@ -1,0 +1,92 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf470
+{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww15240\viewh8400\viewkind0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs22 \cf0 \CocoaLigature0 SQL [9]> SELECT models.brand_name, models.name, brands.founded\
+... [9]> FROM models\
+... [9]> LEFT JOIN brands\
+... [9]> ON brands.name = models.brand_name\
+... [9]> WHERE models.year = 1960;\
+\
+ brand_name |   name   | founded \
+------------+----------+---------\
+ Chevrolet  | Corvette |    1911 \
+ Chevrolet  | Corvair  |    1911 \
+ Fairthorpe | Rockette |    1954 \
+ Fillmore   | Fillmore |         \
+(4 rows)\
+\
+(results do not match answer)\
+\
+SQL [11]> SELECT m.name, m.brand_name, b.founded\
+... [11]> FROM brands AS b\
+... [11]> JOIN models AS m\
+... [11]> ON b.name = m.brand_name;\
+\
+       name       | brand_name | founded \
+------------------+------------+---------\
+ Galaxie          | Ford       |    1903 \
+ Mustang          | Ford       |    1903 \
+ E-Series         | Ford       |    1903 \
+ Thunderbird      | Ford       |    1903 \
+ Thunderbird      | Ford       |    1903 \
+ Model T          | Ford       |    1903 \
+ Imperial         | Chrysler   |    1925 \
+ Minx Magnificent | Hillman    |    1907 \
+ Corvette         | Chevrolet  |    1911 \
+ Corvette         | Chevrolet  |    1911 \
+ Corvair 500      | Chevrolet  |    1911 \
+ Corvette         | Chevrolet  |    1911 \
+ Corvette         | Chevrolet  |    1911 \
+ Corvette         | Chevrolet  |    1911 \
+ Corvair          | Chevrolet  |    1911 \
+ Corvette         | Chevrolet  |    1911 \
+ Corvette         | Chevrolet  |    1911 \
+ Corvette         | Chevrolet  |    1911 \
+ Corvette         | Chevrolet  |    1911 \
+ Corvette         | Chevrolet  |    1911 \
+(46 rows, truncated for display at 20)\
+\
+(results do not match answer)\
+\
+SQL [13]> SELECT b.name, \
+... [13]> m.name,\
+... [13]> m.year,\
+... [13]> b.discontinued,\
+... [13]> b.discontinued-m.year AS years_until_brand_discontinued\
+... [13]> FROM models AS m\
+... [13]> LEFT JOIN brands AS b\
+... [13]> ON m.brand_name = b.name\
+... [13]> WHERE b.discontinued IS NOT NULL\
+... [13]> ORDER BY years_until_brand_discontinued DESC;\
+\
+    name    |       name       | year  | discontinued | years_until_brand_discontinued \
+------------+------------------+-------+--------------+--------------------------------\
+ Pontiac    | Tempest          |  1961 |         2010 |                             49 \
+ Pontiac    | Grand Prix       |  1962 |         2010 |                             48 \
+ Pontiac    | Grand Prix       |  1963 |         2010 |                             47 \
+ Pontiac    | Bonneville       |  1964 |         2010 |                             46 \
+ Pontiac    | Grand Prix       |  1964 |         2010 |                             46 \
+ Pontiac    | GTO              |  1964 |         2010 |                             46 \
+ Pontiac    | LeMans           |  1964 |         2010 |                             46 \
+ Plymouth   | Fury             |  1964 |         2001 |                             37 \
+ Hillman    | Minx Magnificent |  1950 |         1981 |                             31 \
+ Austin     | Mini             |  1959 |         1987 |                             28 \
+ Austin     | Mini Cooper      |  1961 |         1987 |                             26 \
+ Austin     | Mini Cooper S    |  1963 |         1987 |                             24 \
+ Austin     | Mini             |  1963 |         1987 |                             24 \
+ Austin     | Mini Cooper      |  1964 |         1987 |                             23 \
+ Fairthorpe | Rockette         |  1960 |         1976 |                             16 \
+ Studebaker | Avanti           |  1961 |         1967 |                              6 \
+ Rambler    | Classic          |  1963 |         1969 |                              6 \
+ Studebaker | Avanti           |  1962 |         1967 |                              5 \
+ Studebaker | Avanti           |  1963 |         1967 |                              4 \
+ Studebaker | Avanti           |  1964 |         1967 |                              3 \
+(20 rows)\
+\
+(results do not match answer)\
+\
+\
+}
